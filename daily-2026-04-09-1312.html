@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THMC Ads &mdash; April 09, 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #1f1f1f;
+      --border-light: #2a2a2a;
+      --text: #f0f0f0;
+      --muted: #666;
+      --accent: #ffffff;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .topbar-divider {
+      width: 1px;
+      height: 16px;
+      background: var(--border-light);
+    }
+    .topbar-date {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .cometly-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      transition: color 0.15s, border-color 0.15s;
+      letter-spacing: 0.3px;
+    }
+    .cometly-link:hover {
+      color: var(--accent);
+      border-color: #444;
+    }
+    .cometly-link svg {
+      width: 12px;
+      height: 12px;
+      opacity: 0.5;
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      background: var(--surface);
+    }
+    .tab {
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s;
+      user-select: none;
+    }
+    .tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab:hover:not(.active) {
+      color: #aaa;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 32px;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* METRIC GRID */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .metric-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .metric-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .metric-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      margin-top: 28px;
+    }
+    .section-header:first-child { margin-top: 0; }
+
+    /* AD SET TABLE */
+    .table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: #0d0d0d;
+    }
+    td {
+      padding: 13px 16px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #141414; }
+    .td-name {
+      font-weight: 500;
+      color: var(--text);
+      max-width: 280px;
+    }
+    .td-name small {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+    .td-num { color: #ccc; font-variant-numeric: tabular-nums; }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .pill-green { background: rgba(34,197,94,0.12); color: var(--green); }
+    .pill-amber { background: rgba(245,158,11,0.12); color: var(--amber); }
+    .pill-red { background: rgba(239,68,68,0.12); color: var(--red); }
+    .pill-gray { background: rgba(255,255,255,0.05); color: var(--muted); }
+
+    /* ACTIONS TAB */
+    .action-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .action-row:first-child { border-radius: 10px 10px 0 0; }
+    .action-row:last-child { border-bottom: none; border-radius: 0 0 10px 10px; }
+    .action-row:only-child { border-radius: 10px; }
+    .action-row:hover { background: #141414; }
+    .action-label {
+      grid-row: 1 / 3;
+      align-self: center;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .deact .action-label { background: rgba(239,68,68,0.12); color: var(--red); }
+    .increase .action-label { background: rgba(34,197,94,0.12); color: var(--green); }
+    .creative .action-label { background: rgba(168,85,247,0.12); color: var(--purple); }
+    .action-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .action-detail {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .actions-group {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .actions-group-header {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 20px;
+      background: #0d0d0d;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* CACHE NOTICE */
+    .cache-notice {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+    }
+    .cache-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .cache-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--amber);
+    }
+    .cache-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ALERT */
+    .alert-row {
+      background: rgba(245,158,11,0.06);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 12px;
+      color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    /* APPROVAL BOX */
+    .approval-box {
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+    .approval-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .approval-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .approval-cmds {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .approval-cmds code {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-light);
+      border-radius: 5px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--text);
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #333;
+      padding: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="brand">THMC &mdash; Ads Intelligence</div>
+      <div class="topbar-divider"></div>
+      <div class="topbar-date">Last 7 Days &nbsp;&middot;&nbsp; Generated April 09, 2026 at 01:12 PM CDT</div>
+    </div>
+    <a href="https://app.cometly.com" target="_blank" class="cometly-link">
+      Open Cometly
+      <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('overview')">Overview</div>
+    <div class="tab" onclick="switchTab('actions')">Actions</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- OVERVIEW TAB -->
+    <div class="tab-panel active" id="tab-overview">
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-label">7-Day Spend</div>
+          <div class="metric-value">$3,757</div>
+          <div class="metric-sub">Across 20 active ad sets</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Loan Applications</div>
+          <div class="metric-value">19</div>
+          <div class="metric-sub">Last 7 days</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Blended CPA</div>
+          <div class="metric-value">$198</div>
+          <div class="metric-sub">Cost per loan application</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Efficiency</div>
+          <div class="metric-value">10<span style="font-size:18px;color:var(--muted)"> / 20</span></div>
+          <div class="metric-sub">Ad sets converting</div>
+        </div>
+      </div>
+
+      <div class="section-header">Top Performers</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ad Set</th>
+              <th>Budget</th>
+              <th>Applications</th>
+              <th>CPA</th>
+              <th>Avg Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td class="td-name">Broad_Forms_Distressed_Asset</td>
+              <td class="td-num">$42/d</td>
+              <td class="td-num"><strong>4</strong></td>
+              <td><span class="pill pill-green">$70</span></td>
+              <td><span class="pill pill-amber">56</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_Experienced_Emma</td>
+              <td class="td-num">$63/d</td>
+              <td class="td-num"><strong>4</strong></td>
+              <td><span class="pill pill-green">$75</span></td>
+              <td><span class="pill pill-amber">63</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_Under_Contract_Emma_No_Caps</td>
+              <td class="td-num">$36/d</td>
+              <td class="td-num"><strong>3</strong></td>
+              <td><span class="pill pill-green">$76</span></td>
+              <td><span class="pill pill-amber">64</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_Speed_AI</td>
+              <td class="td-num">$36/d</td>
+              <td class="td-num"><strong>2</strong></td>
+              <td><span class="pill pill-green">$122</span></td>
+              <td><span class="pill pill-amber">62</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_FdUp</td>
+              <td class="td-num">$32/d</td>
+              <td class="td-num"><strong>1</strong></td>
+              <td><span class="pill pill-amber">$167</span></td>
+              <td><span class="pill pill-green">69</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_Notes_App</td>
+              <td class="td-num">$24/d</td>
+              <td class="td-num"><strong>1</strong></td>
+              <td><span class="pill pill-amber">$192</span></td>
+              <td><span class="pill pill-amber">58</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_&_LP_WeFundIt_Caps</td>
+              <td class="td-num">$30/d</td>
+              <td class="td-num"><strong>1</strong></td>
+              <td><span class="pill pill-amber">$196</span></td>
+              <td><span class="pill pill-red">23</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_BRRRR_Investors</td>
+              <td class="td-num">$36/d</td>
+              <td class="td-num"><strong>1</strong></td>
+              <td><span class="pill pill-amber">$198</span></td>
+              <td><span class="pill pill-amber">57</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_Under_Contract_Emma_Caps</td>
+              <td class="td-num">$36/d</td>
+              <td class="td-num"><strong>1</strong></td>
+              <td><span class="pill pill-red">$223</span></td>
+              <td><span class="pill pill-green">66</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_iphone</td>
+              <td class="td-num">$43/d</td>
+              <td class="td-num"><strong>1</strong></td>
+              <td><span class="pill pill-red">$287</span></td>
+              <td><span class="pill pill-amber">59</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-header">Zero-Application Ad Sets</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Ad Set</th>
+              <th>Budget</th>
+              <th>7d Spend</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td class="td-name">Broad_Forms_WeKnowFlips_Emma_Video</td>
+              <td class="td-num">$36/d</td>
+              <td class="td-num">$247</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_IG_LE</td>
+              <td class="td-num">$40/d</td>
+              <td class="td-num">$82</td>
+              <td><span class="pill pill-gray">$82 spent &mdash; below $100 threshold</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_AI_Illustrations</td>
+              <td class="td-num">$46/d</td>
+              <td class="td-num">$305</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_Easy_Funding</td>
+              <td class="td-num">$30/d</td>
+              <td class="td-num">$162</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_Banks_Move_Slow</td>
+              <td class="td-num">$30/d</td>
+              <td class="td-num">$207</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_FB_LE</td>
+              <td class="td-num">$40/d</td>
+              <td class="td-num">$100</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_Selfie_Style_AI</td>
+              <td class="td-num">$30/d</td>
+              <td class="td-num">$45</td>
+              <td><span class="pill pill-gray">$45 spent &mdash; below $100 threshold</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_Videos</td>
+              <td class="td-num">$30/d</td>
+              <td class="td-num">$165</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Form_Videos_RIQ_Flippers</td>
+              <td class="td-num">$20/d</td>
+              <td class="td-num">$6</td>
+              <td><span class="pill pill-gray">$6 spent &mdash; below $100 threshold</span></td>
+            </tr>
+            <tr>
+              <td class="td-name">Broad_Forms_Speed_Emma</td>
+              <td class="td-num">$24/d</td>
+              <td class="td-num">$124</td>
+              <td><span class="pill pill-red">Deactivation Candidate</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /overview -->
+
+    <!-- ACTIONS TAB -->
+    <div class="tab-panel" id="tab-actions">
+
+      <div class="alert-row">Total budget freed from deactivations ($172) exceeds total increases allowed by 20% caps ($41.80), so full reallocation is not possible this cycle.</div>
+      
+
+      <div class="actions-group">
+        <div class="actions-group-header">Deactivations &mdash; 5 ad sets</div>
+        
+            <div class="action-row deact">
+              <div class="action-label">DEACTIVATE</div>
+              <div class="action-name">Broad_Forms_AI_Illustrations</div>
+              <div class="action-detail">$46/day freed &mdash; Zero applications with $305.03 spend over 7 days.</div>
+            </div>
+            <div class="action-row deact">
+              <div class="action-label">DEACTIVATE</div>
+              <div class="action-name">Broad_Forms_WeKnowFlips_Emma_Video</div>
+              <div class="action-detail">$36/day freed &mdash; Zero applications with $246.58 spend over 7 days.</div>
+            </div>
+            <div class="action-row deact">
+              <div class="action-label">DEACTIVATE</div>
+              <div class="action-name">Broad_Form_Banks_Move_Slow</div>
+              <div class="action-detail">$30/day freed &mdash; Zero applications with $206.52 spend over 7 days.</div>
+            </div>
+            <div class="action-row deact">
+              <div class="action-label">DEACTIVATE</div>
+              <div class="action-name">Broad_Form_Videos</div>
+              <div class="action-detail">$30/day freed &mdash; Zero applications with $165.27 spend over 7 days.</div>
+            </div>
+            <div class="action-row deact">
+              <div class="action-label">DEACTIVATE</div>
+              <div class="action-name">Broad_Forms_Easy_Funding</div>
+              <div class="action-detail">$30/day freed &mdash; Zero applications with $162.38 spend over 7 days.</div>
+            </div>
+      </div>
+
+      <div class="actions-group">
+        <div class="actions-group-header">Budget Increases &mdash; 20% cap per ad set</div>
+        
+            <div class="action-row increase">
+              <div class="action-label">+20% BUDGET</div>
+              <div class="action-name">Broad_Forms_Experienced_Emma</div>
+              <div class="action-detail">$63 &rarr; $76/day &mdash; Top performer with low CPA $74.51 and strong score 63.0, capped at 20% increase.</div>
+            </div>
+            <div class="action-row increase">
+              <div class="action-label">+20% BUDGET</div>
+              <div class="action-name">Broad_Forms_Distressed_Asset</div>
+              <div class="action-detail">$42 &rarr; $50/day &mdash; Strong CPA $70.42 and decent score 56.0, capped at 20% increase.</div>
+            </div>
+            <div class="action-row increase">
+              <div class="action-label">+20% BUDGET</div>
+              <div class="action-name">Broad_Forms_Under_Contract_Emma_No_Caps</div>
+              <div class="action-detail">$36 &rarr; $43/day &mdash; Good CPA $75.81 and highest score 64.3, capped at 20% increase.</div>
+            </div>
+            <div class="action-row increase">
+              <div class="action-label">+20% BUDGET</div>
+              <div class="action-name">Broad_Forms_Speed_AI</div>
+              <div class="action-detail">$36 &rarr; $43/day &mdash; Moderate CPA $121.64 with solid score 61.5, capped at 20% increase.</div>
+            </div>
+            <div class="action-row increase">
+              <div class="action-label">+20% BUDGET</div>
+              <div class="action-name">Broad_Forms_FdUp</div>
+              <div class="action-detail">$32 &rarr; $38/day &mdash; Highest score 69.0 despite higher CPA $167.08, capped at 20% increase.</div>
+            </div>
+      </div>
+
+      <div class="actions-group">
+        <div class="actions-group-header">Creative Iteration Recommendations</div>
+        
+            <div class="action-row creative">
+              <div class="action-label">NEW CREATIVE</div>
+              <div class="action-name">Broad_Forms_Distressed_Asset</div>
+              <div class="action-detail">CPA $70 &mdash; Score 56 &mdash; Test a more direct investor-focused testimonial to enhance trust and relevance.</div>
+            </div>
+            <div class="action-row creative">
+              <div class="action-label">NEW CREATIVE</div>
+              <div class="action-name">Broad_Forms_Experienced_Emma</div>
+              <div class="action-detail">CPA $75 &mdash; Score 63 &mdash; Try a new UGC variation with Emma addressing common borrower pain points more empathetically.</div>
+            </div>
+            <div class="action-row creative">
+              <div class="action-label">NEW CREATIVE</div>
+              <div class="action-name">Broad_Forms_Under_Contract_Emma_No_Caps</div>
+              <div class="action-detail">CPA $76 &mdash; Score 64 &mdash; Introduce a faster-paced edit highlighting quick approvals to complement the current approach.</div>
+            </div>
+      </div>
+
+      
+        <div class="approval-box">
+          <div class="approval-title">Awaiting Your Approval</div>
+          <div class="approval-sub">Reply in <strong>#manus</strong> on Slack with one of the following:</div>
+          <div class="approval-cmds">
+            <code>approve all</code>
+            <code>approve rec_001</code>
+            <code>reject all</code>
+          </div>
+        </div>
+
+    </div><!-- /actions -->
+
+  </div><!-- /content -->
+
+  <div class="footer">
+    Generated by Manus AI &middot; Auto-deleted after 7 days &middot; April 09, 2026
+  </div>
+
+  <script>
+    function switchTab(name) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
